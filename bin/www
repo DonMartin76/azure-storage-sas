@@ -21,12 +21,21 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var options = {
-	key: fs.readFileSync('./ssl/privatekey.pem'),
-	cert: fs.readFileSync('./ssl/certificate.pem')
-};
+var server = null;
 
-var server = https.createServer(options, app);
+if (process.env.AZURE_STORAGE_SAS_HTTPS)
+{
+  var options = {
+	  key: fs.readFileSync('./ssl/privatekey.pem'),
+	  cert: fs.readFileSync('./ssl/certificate.pem')
+  };
+
+  server = https.createServer(options, app);
+}
+else
+{
+  server = http.createServer(app);
+}
 
 /**
  * Listen on provided port, on all network interfaces.

@@ -38,6 +38,11 @@ app.post('/bulk/token', function(req, res) {
 	   startDate.setMinutes(startDate.getMinutes() - 10);
 
 	   var filename = uuidGen.v4() + ".zip";
+     var container = 'bulkingest';
+     if (process.env.AZURE_STORAGE_SAS_CONTAINER)
+     {
+       container = process.env.AZURE_STORAGE_SAS_CONTAINER;
+     }
 
 	   var sharedAccessPolicy = {
 	     AccessPolicy: {
@@ -48,8 +53,8 @@ app.post('/bulk/token', function(req, res) {
 	     },
 	   };
 
-	   var token = blobService.generateSharedAccessSignature('bulkingest', filename, sharedAccessPolicy);
-	   var sasUrl = blobService.getUrl('bulkingest', filename, token);
+	   var token = blobService.generateSharedAccessSignature(container, filename, sharedAccessPolicy);
+	   var sasUrl = blobService.getUrl(container, filename, token);
 
 	   res.jsonp({   storageUrl: sasUrl, 
 			 filename: filename,
