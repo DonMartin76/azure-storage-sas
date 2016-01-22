@@ -8,11 +8,11 @@ In order to try this out, you will need the following:
 
 ### Usage
 
-Specify the following two environment variables according to your storage account data:
+Specify the following three environment variables according to your storage account data:
 
 * `AZURE_STORAGE_ACCOUNT` with the name of your storage account, e.g. `mystorage-ab342bc`
 * `AZURE_STORAGE_ACCESS_KEY` with the access key to your storage account (retrieve this from your Azure Portal)
-* `AZURE_STORAGE_SAS_CONTAINER` with the name of the container you want to create SAS tokens for, e.g `content` (**Note**: This container has to exist)
+* `AZURE_STORAGE_SAS_CONTAINER` with the name of the container you want to create SAS tokens for, e.g `content` (**Note**: This container has to exist, create it either using some Storage Explorer, or directly from the Azure Portal)
 
 To get the dependencies, run an
 
